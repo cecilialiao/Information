@@ -11,7 +11,7 @@
 #' @param ncore number of cores used. Default is to use detectcores-1.
 #' 
 #' @import parallel
-#' @import doMC
+#' @import doParallel
 #' @import foreach
 #'
 #' @export CreateTables
@@ -72,7 +72,7 @@ CreateTables <- function(data, valid=NULL, y, bins=10, trt=NULL, ncore=NULL){
   
   if (ncore<1) ncore <- 1
   
-  registerDoMC(ncore)
+  registerDoParallel(ncore)
   
   ### Loop through variables
   loopResult <- foreach(i=1:length(variables), .combine='comb', .multicombine=TRUE,
